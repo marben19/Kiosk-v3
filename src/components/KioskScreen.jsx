@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaWallet, FaPlusCircle, FaIdBadge } from "react-icons/fa";
+import { FaWallet, FaPlusCircle, FaIdBadge, FaExpand, FaCompress } from "react-icons/fa";
 import { Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import "./KioskScreen.css";
@@ -8,9 +8,22 @@ import "./KioskScreen.css";
 export default function KioskScreen() {
   const [showTopupModal, setShowTopupModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const navigate = useNavigate();
   const wsRef = useRef(null);
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    }
+  };
+  
   // ===============================
   // TOP-UP BUTTON
   // ===============================
@@ -121,6 +134,9 @@ export default function KioskScreen() {
 
   return (
     <div className="kiosk-container">
+      <button className="fullscreen-btn" onClick={toggleFullscreen}>
+        {isFullscreen ? <FaCompress size={22} /> : <FaExpand size={22} />}
+      </button>
       <div className="kiosk-content">
         <h1 className="kiosk-title">RFID Smart Kiosk</h1>
         <p className="kiosk-subtitle">Tap your card to begin</p>
