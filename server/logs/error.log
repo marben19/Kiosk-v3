@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+2026-03-04T01:14:06.492Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T02:46:30.506Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T02:55:17.854Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T06:04:12.633Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T06:06:29.232Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T06:59:57.400Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
+2026-03-04T07:56:50.911Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
+2026-03-05T01:37:24.669Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
+=======
+2026-03-04T01:14:06.492Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T02:46:30.506Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T02:55:17.854Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T06:04:12.633Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T06:06:29.232Z [ERROR]: SerialPort Error: Opening COM3: File not found
+2026-03-04T06:59:57.400Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
+>>>>>>> 4fa41936b46150a58d154032cd13774c883d3255
