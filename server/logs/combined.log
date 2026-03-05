@@ -335,3 +335,6 @@ TO
 2026-03-05T05:33:08.280Z [INFO]: WebSocket server running on ws://localhost:8080
 2026-03-05T05:33:08.289Z [INFO]: Backend running on port 3001
 2026-03-05T05:33:08.293Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
+2026-03-05T05:36:15.128Z [INFO]: WebSocket server running on ws://localhost:8080
+2026-03-05T05:36:15.136Z [INFO]: Backend running on port 3001
+2026-03-05T05:36:15.140Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
