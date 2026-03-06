@@ -107,8 +107,8 @@ app.get("/stop-card", (req, res) => {
 
   espPort.write("CARD_DIS\n", (err) => {
     if (err) {
-      logger.error(`Failed to send CARD_EN: ${err.message}`);
-      return res.status(500).json({ error: "Failed to send CARD_EN" });
+      logger.error(`Failed to send CARD_DIS: ${err.message}`);
+      return res.status(500).json({ error: "Failed to send CARD_DIS" });
     }
     logger.info("CARD_DIS command sent to ESP32");
     res.json({ message: "CARD_DIS sent" });
@@ -129,17 +129,30 @@ app.get("/start-card", (req, res) => {
   });
 });
 
+app.get("/stop-scan", (req, res) => {
+  if (!espPort) return res.status(500).json({ error: "ESP32 not connected" });
+
+  espPort.write("TOPUP_DIS\n", (err) => {
+    if (err) {
+      logger.error(`Failed to send TOPUP_DIS: ${err.message}`);
+      return res.status(500).json({ error: "Failed to send TOPUP_DIS" });
+    }
+    logger.info("TOPUP_DIS command sent to ESP32");
+    res.json({ message: "TOPUP_DIS sent" });
+  });
+});
+
 
 app.get("/start-scan", (req, res) => {
   if (!espPort) return res.status(500).json({ error: "ESP32 not connected" });
   console.log("Received request to start scan");
   espPort.write("TOPUP_EN\n", (err) => {
     if (err) {
-      logger.error(`Failed to send CARD_EN: ${err.message}`);
-      return res.status(500).json({ error: "Failed to send CARD_EN" });
+      logger.error(`Failed to send TOPUP_EN: ${err.message}`);
+      return res.status(500).json({ error: "Failed to send TOPUP_EN" });
     }
-    logger.info("CARD_EN command sent to ESP32");
-    res.json({ message: "CARD_EN sent" });
+    logger.info("TOPUP_EN command sent to ESP32");
+    res.json({ message: "TOPUP_EN sent" });
   });
 });
 
