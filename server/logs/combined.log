@@ -51,3 +51,7 @@
 2026-03-06T06:17:10.730Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
 2026-03-06T06:18:17.348Z [INFO]: WebSocket client connected
 2026-03-06T06:18:17.735Z [INFO]: WebSocket client connected
+2026-03-06T07:29:30.582Z [INFO]: WebSocket server running on ws://localhost:8080
+2026-03-06T07:29:30.590Z [INFO]: Backend running on port 3001
+2026-03-06T07:29:30.593Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
+2026-03-06T07:41:50.771Z [INFO]: WebSocket client connected
