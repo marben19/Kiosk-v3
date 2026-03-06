@@ -51,6 +51,7 @@ export default function Topup() {
 
           const result = await response.json();
           setUserBalance(result.balance ?? 0);
+          setLoadingBalance(false);
 
         } catch (err) {
           console.error("Failed to update balance:", err);
@@ -106,6 +107,7 @@ export default function Topup() {
 
           const result = await response.json();
           setUserBalance(result.balance ?? 0);
+          setLoadingBalance(false);
 
         } catch (err) {
           console.error("Failed to update balance:", err);
