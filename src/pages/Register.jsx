@@ -131,7 +131,7 @@ export default function Register() {
       address: formData.address,
       cardNo: formData.card_uid,
       birthDate: formData.birthday ? new Date(formData.birthday).toISOString() : null,
-      userCategory: categoryMap[formData.idType] ?? 0,
+      userCategory: formData.idType,
     };
 
     try {

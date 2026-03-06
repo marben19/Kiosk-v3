@@ -45,8 +45,8 @@ export default function Topup() {
 
     ws.onmessage = async (event) => {
       const data = JSON.parse(event.data);
-
-      if (data.type === "topup_disabled") {
+      	console.log(data.type);
+      if (data.type === "topup_closed") {
         ws.close();
         navigate("/");
         return;

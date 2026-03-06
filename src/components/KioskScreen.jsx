@@ -79,7 +79,7 @@ export default function KioskScreen() {
   const handleBalanceClick = async () => {
     setShowBalanceModal(true);
 
-    await fetch("http://localhost:3001/start-scan")
+    await fetch("http://localhost:3001/start-card")
       .then(res => res.json())
       .catch(console.error);
 
@@ -94,7 +94,7 @@ export default function KioskScreen() {
 
         try {
           const response = await fetch(
-            "https://unfecund-unstretchable-hyacinth.ngrok-free.dev/balance",
+            "https://unfecund-unstretchable-hyacinth.ngrok-free.dev/cardholders/balance",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -111,7 +111,13 @@ export default function KioskScreen() {
             icon: "success",
             title: "Balance Retrieved!",
             text: `Your balance is: ₱${result.balance ?? 0}`,
-          });
+          }).then(async () => {
+	  
+		    await fetch("http://localhost:3001/stop-card")
+		      .then(res => res.json())
+		      .catch(console.error);
+		
+	  });
 
         } catch (error) {
           console.error(error);

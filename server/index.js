@@ -75,8 +75,14 @@ espPort.on("data", (data) => {
     broadcast({ type: "topup_enabled" });
   }
 
-  if (message === "TOPUP_DIS") {
-    broadcast({ type: "topup_disabled" });
+  if (message === "TOPUP_CLOSED") {
+    logger.info(`Websocket: ${message}`);
+    broadcast({ type: "topup_closed" });
+  }
+
+  if (message === "PUP_DISABLED") {
+    logger.info(`Websocket: ${message}`);
+    broadcast({ type: "topup_closed" });
   }
 
   if (message === "CARD_EN") {
@@ -86,6 +92,8 @@ espPort.on("data", (data) => {
   if (message === "CARD_DIS") {
     broadcast({ type: "card_disabled" });
   }
+  console.log(message);	
+
 });
 
 // Handle serial errors
