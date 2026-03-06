@@ -18,3 +18,4 @@
 2026-03-05T05:33:08.293Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
 2026-03-05T05:36:15.140Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
 2026-03-06T05:45:21.014Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
+2026-03-06T06:17:10.730Z [ERROR]: SerialPort Error: Opening /dev/ttyAMA0: Unknown error code 3
