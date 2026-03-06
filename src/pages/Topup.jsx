@@ -12,23 +12,46 @@ export default function Topup() {
   const [userBalance, setUserBalance] = useState(0);
   const [loadingBalance, setLoadingBalance] = useState(true);
 
-  // 🔹 Fetch initial balance when page loads
   useEffect(() => {
     if (!scannedCardNo) return;
+
+    const fetchBalance = async () => {
+      try {
+        const response = await fetch(
+          "https://unfecund-unstretchable-hyacinth.ngrok-free.dev/cardholders/load",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              cardNo: scannedCardNo,
+              deviceId: "e2047211-e92d-4c62-895f-25dd48bc9596",
+              amount: 0, // just to get current balance
+            }),
+          }
+        );
+
+        const result = await response.json();
+        setUserBalance(result.balance ?? 0);
+      } catch (err) {
+        console.error("Failed to fetch balance:", err);
+      }
+
+      setLoadingBalance(false);
+    };
+
+    fetchBalance();
 
     const ws = new WebSocket("ws://localhost:8080");
 
     ws.onmessage = async (event) => {
       const data = JSON.parse(event.data);
 
-      // 🔹 Redirect if topup disabled
       if (data.type === "topup_disabled") {
         ws.close();
         navigate("/");
         return;
       }
 
-      // 🔹 Money inserted
       if (data.type === "money") {
         const newAmount = Number(data.amount);
         if (isNaN(newAmount)) return;
@@ -51,8 +74,6 @@ export default function Topup() {
 
           const result = await response.json();
           setUserBalance(result.balance ?? 0);
-          setLoadingBalance(false);
-
         } catch (err) {
           console.error("Failed to update balance:", err);
         }
@@ -63,60 +84,8 @@ export default function Topup() {
       console.error("WebSocket error:", err);
     };
 
-    ws.onclose = () => {
-      console.log("WebSocket disconnected");
-    };
-
     return () => ws.close();
   }, [scannedCardNo, navigate]);
-
-  // 🔹 Listen for money insertion
-  useEffect(() => {
-    if (!scannedCardNo) return;
-
-    const ws = new WebSocket("ws://localhost:8080");
-
-    ws.onmessage = async (event) => {
-      const data = JSON.parse(event.data);
-
-      // 🔹 Redirect if topup disabled
-      if (data.type === "topup_disabled") {
-        ws.close();
-        navigate("/");
-        return;
-      }
-
-      // 🔹 Money inserted
-      if (data.type === "money") {
-        const newAmount = Number(data.amount);
-        setInsertedAmount(newAmount);
-
-        try {
-          const response = await fetch(
-            "https://unfecund-unstretchable-hyacinth.ngrok-free.dev/cardholders/load",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                cardNo: scannedCardNo,
-                deviceId: "e2047211-e92d-4c62-895f-25dd48bc9596",
-                amount: newAmount,
-              }),
-            }
-          );
-
-          const result = await response.json();
-          setUserBalance(result.balance ?? 0);
-          setLoadingBalance(false);
-
-        } catch (err) {
-          console.error("Failed to update balance:", err);
-        }
-      }
-    };
-
-    return () => ws.close();
-  }, [scannedCardNo]);
 
   return (
     <div className="topup-container">
@@ -126,9 +95,7 @@ export default function Topup() {
 
         <div className="topup-display">
           <h2>Card Number</h2>
-          <div className="amount-box">
-            {scannedCardNo}
-          </div>
+          <div className="amount-box">{scannedCardNo}</div>
         </div>
 
         <div className="topup-display">

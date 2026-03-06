@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-
 export default function Test() {
   const [cardNo, setCardNo] = useState("");
-  const [deviceId, setDeviceId] = useState("3fa85f64-5717-4562-b3fc-2c963f66afa6");
+  const [deviceId, setDeviceId] = useState("e2047211-e92d-4c62-895f-25dd48bc9596");
+  const [amount, setAmount] = useState("");
   const [responseData, setResponseData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -41,10 +41,44 @@ export default function Test() {
     }
   };
 
+  const handleLoadBalance = async () => {
+    setLoading(true);
+    setError(null);
+    setResponseData(null);
+
+    try {
+      const response = await fetch(
+        "https://unfecund-unstretchable-hyacinth.ngrok-free.dev/cardholders/load",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            cardNo,
+            deviceId,
+            amount: Number(amount),
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Request failed");
+      }
+
+      setResponseData(data);
+    } catch (err) {
+      console.error("Failed to update balance:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h2>API Balance Tester</h2>
+        <h2>API Card Tester</h2>
 
         <div style={styles.inputGroup}>
           <label>Card Number</label>
@@ -65,8 +99,25 @@ export default function Test() {
           />
         </div>
 
+        <div style={styles.inputGroup}>
+          <label>Load Amount</label>
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="Enter Amount"
+          />
+        </div>
+
         <button onClick={handleCheckBalance} style={styles.button}>
           {loading ? "Checking..." : "Check Balance"}
+        </button>
+
+        <button
+          onClick={handleLoadBalance}
+          style={{ ...styles.button, background: "#3b82f6", marginTop: "10px" }}
+        >
+          {loading ? "Processing..." : "Load Balance"}
         </button>
 
         {error && (
@@ -80,9 +131,7 @@ export default function Test() {
             <h4>Full Response:</h4>
             <pre>{JSON.stringify(responseData, null, 2)}</pre>
 
-            <h3>
-              Balance: ₱{responseData.balance ?? "N/A"}
-            </h3>
+            <h3>Balance: ₱{responseData.balance ?? "N/A"}</h3>
           </div>
         )}
       </div>
