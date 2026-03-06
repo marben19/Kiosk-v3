@@ -75,7 +75,11 @@ espPort.on("data", (data) => {
     broadcast({ type: "topup_enabled" });
   }
 
-  if (message === "TOPUP_DIS") {
+  if (message === "TOPUP_CLOSED") {
+    broadcast({ type: "topup_disabled" });
+  }
+
+  if (message === "POP_DISABLED") {
     broadcast({ type: "topup_disabled" });
   }
 
