@@ -24,7 +24,7 @@ export default function Topup() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               cardNo: scannedCardNo,
-              deviceId: "e2047211-e92d-4c62-895f-25dd48bc9596",
+              deviceId: "e92b51f6-4683-4844-8395-8d1a4f8849e4",
               amount: 0, // just to get current balance
             }),
           }
@@ -66,7 +66,7 @@ export default function Topup() {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 cardNo: scannedCardNo,
-                deviceId: "e2047211-e92d-4c62-895f-25dd48bc9596",
+                deviceId: "e92b51f6-4683-4844-8395-8d1a4f8849e4",
                 amount: newAmount,
               }),
             }

@@ -23,7 +23,7 @@ export default function KioskScreen() {
       }
     }
   };
-  
+ 
   // ===============================
   // TOP-UP BUTTON
   // ===============================
@@ -58,7 +58,7 @@ export default function KioskScreen() {
 
 
   // ===============================
-  // STOP CARD SCAN WHEN MAIN PAGE LOADS
+  // STOP CARD & TOP-UP WHEN MAIN PAGE LOADS
   // ===============================
   useEffect(() => {
     const stopCard = async () => {
@@ -70,7 +70,17 @@ export default function KioskScreen() {
       }
     };
 
+    const stopScan = async () => {
+      try {
+        await fetch("http://localhost:3001/stop-scan");
+        console.log("Top-up disabled");
+      } catch (error) {
+        console.error("Failed to stop top-up", error);
+      }
+    };
+
     stopCard();
+    stopScan();
   }, []);
 
   // ===============================
@@ -100,7 +110,7 @@ export default function KioskScreen() {
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 cardNo: data.uid,
-                deviceId: "e2047211-e92d-4c62-895f-25dd48bc9596"
+                deviceId: "e92b51f6-4683-4844-8395-8d1a4f8849e4"
               }),
             }
           );
@@ -111,13 +121,7 @@ export default function KioskScreen() {
             icon: "success",
             title: "Balance Retrieved!",
             text: `Your balance is: ₱${result.balance ?? 0}`,
-          }).then(async () => {
-	  
-		    await fetch("http://localhost:3001/stop-card")
-		      .then(res => res.json())
-		      .catch(console.error);
-		
-	  });
+          });
 
         } catch (error) {
           console.error(error);
@@ -144,8 +148,8 @@ export default function KioskScreen() {
         {isFullscreen ? <FaCompress size={22} /> : <FaExpand size={22} />}
       </button>
       <div className="kiosk-content">
-        <h1 className="kiosk-title">RFID Smart Kiosk</h1>
-        <p className="kiosk-subtitle">Tap your card to begin</p>
+        <h1 className="kiosk-title">PIDGEON Account Management Kiosk</h1>
+        <p className="kiosk-subtitle">Select an option to begin!</p>
 
         <div className="kiosk-buttons">
           <div className="kiosk-card blue" onClick={handleBalanceClick}>

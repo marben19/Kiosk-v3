@@ -179,8 +179,8 @@ export default function Register() {
       <div className="register-wrapper">
         {/* LEFT PANEL */}
         <div className="register-left">
-          <h1>Register RFID Card</h1>
-          <p>Create a new user profile and link RFID card</p>
+          <h1>Register PIDGEON Card</h1>
+          <p>Create a new user profile and link PIDGEON card</p>
           <div className="rfid-status">
             <FaIdCard size={22} />
             <span>Waiting for card scan...</span>
@@ -229,7 +229,7 @@ export default function Register() {
                   value={formData.middleInitial}
                   onChange={handleChange}
                 />
-                <label>M.O</label>
+                <label>M.I.</label>
               </div>
             </div>
 
