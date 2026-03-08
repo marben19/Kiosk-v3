@@ -289,10 +289,10 @@ export default function Register() {
                 onChange={handleChange}
                 className="modern-select"
               >
-                <option value="REGULAR">Regular</option>
+                <option value="Regular">Regular</option>
                 <option value="PWD">PWD</option>
-                <option value="STUDENT">Student</option>
-                <option value="SENIOR">Senior</option>
+                <option value="Student">Student</option>
+                <option value="Senior">Senior</option>
               </select>
               <label className="select-label">ID Type</label>
             </div>
